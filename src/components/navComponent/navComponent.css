@@ -1,0 +1,12 @@
+nav{
+    background-color: #EFF0FB;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.nav-logo{
+    padding: 10px;
+    color: #26262A;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
