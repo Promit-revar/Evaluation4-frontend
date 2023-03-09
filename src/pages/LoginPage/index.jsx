@@ -2,36 +2,65 @@
 import React from "react";
 import "./LoginPage.css";
 import makeRequest from "../../utils/makeRequest";
-import { loginUser } from "../../constants/authEndpoints";
+import { loginUser, createUser } from "../../constants/authEndpoints";
 import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
-    const [username, setUsername] = React.useState("");
+    const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [login, setLogin] = React.useState(true);
     const navigate = useNavigate();
     const handleChangeUsername = (e) => {
-        setUsername(e.target.value);
+        setEmail(e.target.value);
     };
     const handleChangePassword = (e) => {
         setPassword(e.target.value);
     };
     const handleLogin = async () => {
         try{
-            const result=await makeRequest(loginUser, {data:{ username, password } });
-            localStorage.setItem("token", result.token);
-            if(result.success){
-                navigate("/home");
+            if(login){
+                const result=await makeRequest(loginUser, {data:{ email, password } });
+                localStorage.setItem("token", result.token);
+                if(result.success){
+                    navigate("/home");
+                }
+            }
+            else{
+                const result=await makeRequest(createUser, {data:{ email, password } });
+                console.log(result)
+                if(result.success){
+                    alert("User created successfully");
+                    window.location.reload();
+                }
             }
         }
         catch(err){
             console.log(err);
         }
     }
+    
     return (
         <div className="LoginPage">
-        <h1>Login Page</h1>
-        <input type="text" placeholder="Username" onChange={handleChangeUsername}/>
-        <input type="password" placeholder="Password" onChange={handleChangePassword} />
-        <button onClick={handleLogin}>Login</button>
+            <div className="login-card">
+                <img src={require("../../assets/images/loginImage.png")} alt="login-Image" />
+            </div>
+            <div className="login-form">
+                <div>
+                    <h1>{login?"Login":"Register"} to your CMS+ account</h1>
+                </div>
+                <div className="form">
+                    <div className="email-section">
+                        <label htmlFor="email">Email</label>
+                        <input type="text" id="email" onChange={handleChangeUsername}/>
+                    </div>
+                    <div className="password-section">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" onChange={handleChangePassword} />
+                    </div>
+                    <button onClick={handleLogin}>{login?"Login":"Register"}</button>
+                    <a href="#"><u>Forgot Password?</u></a>
+                    <a onClick={()=>setLogin(false)}><u>Don't have an account?</u></a>
+                </div>
+            </div>
         </div>
     );
 }
