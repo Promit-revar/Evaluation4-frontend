@@ -11,8 +11,8 @@ body{
 .login-card{
     display: flex;
     width: 60%;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     background-color: #EEF0FF
 

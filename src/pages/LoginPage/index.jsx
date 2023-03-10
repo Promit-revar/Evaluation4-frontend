@@ -42,6 +42,7 @@ export default function LoginPage() {
     return (
         <div className="LoginPage">
             <div className="login-card">
+                <h1>Design API's Fast,<br></br>Manage Content Easily</h1>
                 <img src={require("../../assets/images/loginImage.png")} alt="login-Image" />
             </div>
             <div className="login-form">
@@ -59,7 +60,7 @@ export default function LoginPage() {
                     </div>
                     <button onClick={handleLogin}>{login?"Login":"Register"}</button>
                     <a href="#"><u>Forgot Password?</u></a>
-                    <a onClick={()=>setLogin(false)}><u>Don't have an account?</u></a>
+                    <a style={{cursor:"pointer"}} onClick={()=>setLogin(!login)}><u>{login?"Don't have an account?":"go to login"}</u></a>
                 </div>
             </div>
         </div>

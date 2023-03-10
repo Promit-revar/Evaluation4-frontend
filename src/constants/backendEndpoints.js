@@ -20,3 +20,23 @@ export const postCollection = {
     url: '/data/',
     method: 'POST'
 }
+export const getAllContentTypes = {
+    url: '/get-content-types',
+    method: 'GET'
+}
+export const createContentType = {
+    url: '/create-content-type',
+    method: 'POST'
+}
+export const createAttribute = {
+    url: '/create-attribute/',
+    method: 'POST'
+}
+export const deleteAttribute = {
+    url: '/delete-attribute/',
+    method: 'DELETE'
+}
+export const updateContentTypeEndpoint = {
+    url: '/update-content-type/',
+    method: 'PUT'
+}

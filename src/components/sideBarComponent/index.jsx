@@ -8,7 +8,6 @@ export default function SideBarComponent(props) {
     const authToken = localStorage.getItem("token");
     React.useEffect(()=>{
         makeRequest(getContentTypes,BASE_URL,{headers:{authorization:authToken}}).then((res)=>{
-            console.log(res);
             setContentTypes([...res]);
         }
         ).catch((err)=>{
@@ -19,7 +18,10 @@ export default function SideBarComponent(props) {
         props.handleListClick(e.target.id);
     }
     const handleMouseEnter=(e)=>{
-        console.log(e.target.className = "active");
+        e.target.className = "active";
+    }
+    const handleContentClick =()=>{
+        props.handleTypeBuild();
     }
     return(
         <div className={"side-bar"}>
@@ -45,7 +47,7 @@ export default function SideBarComponent(props) {
                     </ul>
                 </div>
                 <div className="side-bar-footer" onMouseEnter={handleMouseEnter} onMouseLeave={(e)=>e.target.className="side-bar-footer"}>
-                    <p>CONTENT TYPE BUILDER</p>
+                    <p onClick={handleContentClick}>CONTENT TYPE BUILDER</p>
                 </div>
             </div>
         </div>
