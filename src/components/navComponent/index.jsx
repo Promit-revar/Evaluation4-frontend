@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import "./navComponent.css";
-
+import propTypes from "prop-types";
 export default function NavComponent(props) {
     const editName=()=>{
         props.handleClick();
@@ -21,3 +21,7 @@ export default function NavComponent(props) {
         </nav>
     );
 }
+NavComponent.propTypes = {
+    content: propTypes.string,
+    handleClick: propTypes.func 
+};

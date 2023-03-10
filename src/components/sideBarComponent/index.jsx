@@ -3,6 +3,7 @@ import React from "react";
 import "./sideBarComponent.css";
 import makeRequest from "../../utils/makeRequest";
 import { getContentTypes, BASE_URL } from "../../constants/backendEndpoints";
+import propTypes from "prop-types"; 
 export default function SideBarComponent(props) {    
     const[contentTypes, setContentTypes]=React.useState([]);
     const authToken = localStorage.getItem("token");
@@ -53,5 +54,8 @@ export default function SideBarComponent(props) {
         </div>
     )
 }
-
+SideBarComponent.propTypes = {
+    handleListClick: propTypes.func,
+    handleTypeBuild: propTypes.func
+};
 

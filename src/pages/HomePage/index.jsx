@@ -47,6 +47,7 @@ export default function HomePage() {
         console.log(err);
       });
   }, []);
+  
   const handleChangeContentType = () => {
     setChangeContentType(true);
   };
@@ -189,7 +190,7 @@ export default function HomePage() {
         setupdateContentType(e.target.value);
     }
     const onSubmitUpdateContentType = () => {
-        const request = { ...updateContentTypeEndpoint, url: updateContentTypeEndpoint.url + presentContentType.contentId };
+        const request = { ...updateContentTypeEndpoint, url: updateContentTypeEndpoint.url + data.contentId };
         makeRequest(request, BASE_URL, {
             headers: { authorization: authToken },
             data: { name: updateContentType },
@@ -207,28 +208,6 @@ export default function HomePage() {
   if (contentTypeBuilder) {
     return (
       <div className="HomePage">
-        {changeContentType && (
-          <ModalComponent>
-            <div className="form">
-              <div className="form-fields">
-                <label style={{ fontSize: '20px' }}>
-                  Name of the content type
-                </label>
-                <br />
-                <input type="text" onChange={handleUpdateContentType} />
-              </div>
-            </div>
-            <div className="form-buttons">
-              <button
-                onClick={() => setAddType(false)}
-                style={{ backgroundColor: '#fff', color: '#000' }}
-              >
-                Cancel
-              </button>
-              <button onClick={onSubmitUpdateContentType}>Submit</button>
-            </div>
-          </ModalComponent>
-        )}
         {addType && (
           <ModalComponent>
             <div className="header">
@@ -293,7 +272,7 @@ export default function HomePage() {
           <div className="right-side">
             <div className="nav">
               {/* {console.log(data.name)} */}
-              <NavComponent content={'CONTENT TYPE'}  />
+              <NavComponent content={'CONTENT TYPE'}  handleClick={handleChangeContentType}/>
             </div>
             <div className="middle-section">
               <div className="middle-section-header">
@@ -332,7 +311,7 @@ export default function HomePage() {
         </div>
         <div className="right-side">
           <div className="nav">
-            <NavComponent content={''} />
+            <NavComponent content={''} handleClick={handleChangeContentType} />
           </div>
           <div className="right">
             <div className="right-section-top">
@@ -386,6 +365,28 @@ export default function HomePage() {
   } else {
       return (
         <div className="HomePage">
+            {changeContentType && (
+          <ModalComponent>
+            <div className="form">
+              <div className="form-fields">
+                <label style={{ fontSize: '20px' }}>
+                  Name of the content type
+                </label>
+                <br />
+                <input type="text" onChange={handleUpdateContentType} />
+              </div>
+            </div>
+            <div className="form-buttons">
+              <button
+                onClick={() => setChangeContentType(false)}
+                style={{ backgroundColor: '#fff', color: '#000' }}
+              >
+                Cancel
+              </button>
+              <button onClick={onSubmitUpdateContentType}>Submit</button>
+            </div>
+          </ModalComponent>
+        )}
             {showModal && <ModalComponent>
           <div className="header">
             <h1>{data.name}</h1>
@@ -420,7 +421,7 @@ export default function HomePage() {
           <div className="right-side">
             <div className="nav">
               {/* {console.log(data.name)} */}
-              <NavComponent content={data.name} handleClick={handleChangeContentType}/>
+              <NavComponent content={data.name} handleClick={handleChangeContentType} />
             </div>
             <div className="card">
               <div className={'counter'}>

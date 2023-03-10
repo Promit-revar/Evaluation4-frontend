@@ -3,6 +3,7 @@ import React from "react";
 import "./collectionCardComponent.css";
 import makeRequest from "../../utils/makeRequest";
 import { deleteCollection, BASE_URL } from "../../constants/backendEndpoints";
+import propTypes from "prop-types";
 export default function CollectionCardComponent(props) {
     const handleDelete=()=>{
         deleteCollection.url+=props.content.collectionId;
@@ -41,3 +42,6 @@ export default function CollectionCardComponent(props) {
         return <div>loading ...</div>
     }
 }
+CollectionCardComponent.propTypes = {
+    content: propTypes.object
+};
