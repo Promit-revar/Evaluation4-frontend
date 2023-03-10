@@ -60,6 +60,7 @@ body{
     background-color:  #8D65F4;
     border-radius: 5px;
     border: none;
+    width: 290px;
 }
 .form a{
     color: grey;

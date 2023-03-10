@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import './HomePage.css';
 import NavComponent from '../../components/navComponent';
@@ -33,38 +32,41 @@ export default function HomePage() {
     type: null,
   });
   const [changeContentType, setChangeContentType] = React.useState(false);
-  const [updateContentType,setupdateContentType] = React.useState("");
+  const [updateContentType, setupdateContentType] = React.useState('');
   const authToken = localStorage.getItem('token');
   React.useEffect(() => {
     makeRequest(getAllContentTypes, BASE_URL, {
       headers: { authorization: authToken },
     })
       .then((res) => {
-        console.log("content types",res);
+        console.log('content types', res);
         setAllContentTypes([...res]);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  
+
   const handleChangeContentType = () => {
     setChangeContentType(true);
   };
   const onSubmitAttribute = () => {
-    if(!presentContentType.contentId){
-        window.alert("Please select a content type");
+    if (!presentContentType.contentId) {
+      window.alert('Please select a content type');
     }
     //createAttribute.url += presentContentType.contentId;
-    const request = {...createAttribute,url:createAttribute.url+presentContentType.contentId}
+    const request = {
+      ...createAttribute,
+      url: createAttribute.url + presentContentType.contentId,
+    };
     makeRequest(request, BASE_URL, {
       headers: { authorization: authToken },
-      data: {...newAttribute},
+      data: { ...newAttribute },
     })
       .then((res) => {
         console.log(res);
         setAttr(false);
-        //window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -81,14 +83,17 @@ export default function HomePage() {
       .then((res) => {
         console.log(res);
         setAddType(false);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const handleSubmit = () => {
-    const request = { ...postCollection, url: postCollection.url + data.contentId };
+    const request = {
+      ...postCollection,
+      url: postCollection.url + data.contentId,
+    };
     makeRequest(request, BASE_URL, {
       headers: { authorization: authToken },
       data: formData,
@@ -113,32 +118,36 @@ export default function HomePage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleItemClick = (id) => {
-    
-    const attrRequest = { ...getAllAttributesByContentId, url: getAllAttributesByContentId.url + id };
+    const attrRequest = {
+      ...getAllAttributesByContentId,
+      url: getAllAttributesByContentId.url + id,
+    };
     makeRequest(attrRequest, BASE_URL, {
-        headers: { authorization: authToken },
-        })
-        .then((res) => {
-            console.log(res);
-            setAttributes([...res]);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    const request = { ...getAllCollectionByContentId, url: getAllCollectionByContentId.url + id };
+      headers: { authorization: authToken },
+    })
+      .then((res) => {
+        console.log(res);
+        setAttributes([...res]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    const request = {
+      ...getAllCollectionByContentId,
+      url: getAllCollectionByContentId.url + id,
+    };
     makeRequest(request, BASE_URL, {
       headers: { authorization: authToken },
     })
       .then((res) => {
         console.log(res);
-        if(res){
-        setData({ ...res });
-        }
-        else{
-            const contentData=allContentTypes.filter((item)=>{
-                return item.contentId===id;
-            });
-            setData({ ...contentData[0] });
+        if (res) {
+          setData({ ...res });
+        } else {
+          const contentData = allContentTypes.filter((item) => {
+            return item.contentId === id;
+          });
+          setData({ ...contentData[0] });
         }
       })
       .catch((err) => {
@@ -147,9 +156,12 @@ export default function HomePage() {
     setContentTypeBuilder(false);
   };
   const handleItemAttributesClick = (e) => {
-    console.log(e.target.id, e.target.innerHTML)
+    console.log(e.target.id, e.target.innerHTML);
     setPresentContentType({ name: e.target.innerHTML, contentId: e.target.id });
-    const request ={...getAllAttributesByContentId, url: getAllAttributesByContentId.url + e.target.id};
+    const request = {
+      ...getAllAttributesByContentId,
+      url: getAllAttributesByContentId.url + e.target.id,
+    };
     makeRequest(request, BASE_URL, {
       headers: { authorization: authToken },
     })
@@ -171,7 +183,10 @@ export default function HomePage() {
     setNewContentType(e.target.value);
   };
   const handleDeleteAttribute = (attributeId) => {
-    const request = { ...deleteAttribute, url: deleteAttribute.url + attributeId };
+    const request = {
+      ...deleteAttribute,
+      url: deleteAttribute.url + attributeId,
+    };
     makeRequest(request, BASE_URL, {
       headers: { authorization: authToken },
     })
@@ -182,25 +197,28 @@ export default function HomePage() {
       .catch((err) => {
         console.log(err);
       });
-  }
-    const handleUpdateContentType = (e) => {
-        setupdateContentType(e.target.value);
-    }
-    const onSubmitUpdateContentType = () => {
-        const request = { ...updateContentTypeEndpoint, url: updateContentTypeEndpoint.url + data.contentId };
-        makeRequest(request, BASE_URL, {
-            headers: { authorization: authToken },
-            data: { name: updateContentType },
-        })
-            .then((res) => {
-                console.log(res);
-                setChangeContentType(false);
-                window.location.reload();
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
+  };
+  const handleUpdateContentType = (e) => {
+    setupdateContentType(e.target.value);
+  };
+  const onSubmitUpdateContentType = () => {
+    const request = {
+      ...updateContentTypeEndpoint,
+      url: updateContentTypeEndpoint.url + data.contentId,
+    };
+    makeRequest(request, BASE_URL, {
+      headers: { authorization: authToken },
+      data: { name: updateContentType },
+    })
+      .then((res) => {
+        console.log(res);
+        setChangeContentType(false);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   if (contentTypeBuilder) {
     return (
@@ -230,7 +248,7 @@ export default function HomePage() {
             </div>
           </ModalComponent>
         )}
-        { addAttr && (
+        {addAttr && (
           <ModalComponent>
             <div className="header">
               <h1>Add Attribute</h1>
@@ -269,7 +287,10 @@ export default function HomePage() {
           <div className="right-side">
             <div className="nav">
               {/* {console.log(data.name)} */}
-              <NavComponent content={'CONTENT TYPE'}  handleClick={handleChangeContentType}/>
+              <NavComponent
+                content={'CONTENT TYPE'}
+                handleClick={handleChangeContentType}
+              />
             </div>
             <div className="middle-section">
               <div className="middle-section-header">
@@ -344,7 +365,7 @@ export default function HomePage() {
                       style={{ height: '15px' }}
                       alt="delete-icon"
                       className="delete-icon"
-                      onClick={()=>handleDeleteAttribute(item.attributeId)}
+                      onClick={() => handleDeleteAttribute(item.attributeId)}
                     />
                     <img
                       src={require('../../assets/images/note.png')}
@@ -360,9 +381,9 @@ export default function HomePage() {
       </div>
     );
   } else {
-      return (
-        <div className="HomePage">
-            {changeContentType && (
+    return (
+      <div className="HomePage">
+        {changeContentType && (
           <ModalComponent>
             <div className="form">
               <div className="form-fields">
@@ -384,82 +405,88 @@ export default function HomePage() {
             </div>
           </ModalComponent>
         )}
-            {showModal && <ModalComponent>
-          <div className="header">
-            <h1>{data.name}</h1>
-          </div>
-          <div className="form">
-            <div className="form-fields">
-              {attributes.map((item) => (
-                <div key={item}>
-                  <label key={item.contentId} style={{ fontSize: '20px' }}>{item.name}</label>
-                  <br />
-                  <input key={item.name} type="text" onChange={handleFormFill} name={item.name} />
-                </div>
-              ))}
+        {showModal && (
+          <ModalComponent>
+            <div className="header">
+              <h1>{data.name}</h1>
             </div>
-            <div className="form-buttons">
-              <button
-                onClick={() => setShowModal(false)}
-                style={{ backgroundColor: '#fff', color: '#000' }}
-              >
-                Cancel
-              </button>
-              <button onClick={handleSubmit}>Submit</button>
+            <div className="form">
+              <div className="form-fields">
+                {attributes.map((item) => (
+                  <div key={item}>
+                    <label key={item.contentId} style={{ fontSize: '20px' }}>
+                      {item.name}
+                    </label>
+                    <br />
+                    <input
+                      key={item.name}
+                      type="text"
+                      onChange={handleFormFill}
+                      name={item.name}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="form-buttons">
+                <button
+                  onClick={() => setShowModal(false)}
+                  style={{ backgroundColor: '#fff', color: '#000' }}
+                >
+                  Cancel
+                </button>
+                <button onClick={handleSubmit}>Submit</button>
+              </div>
             </div>
-          </div>
-        </ModalComponent>}
-          <div className="left-side">
-            <SideBarComponent
-              handleListClick={handleItemClick}
-              handleTypeBuild={handleContentTypeBuilder}
+          </ModalComponent>
+        )}
+        <div className="left-side">
+          <SideBarComponent
+            handleListClick={handleItemClick}
+            handleTypeBuild={handleContentTypeBuilder}
+          />
+        </div>
+        <div className="right-side">
+          <div className="nav">
+            {/* {console.log(data.name)} */}
+            <NavComponent
+              content={data.name}
+              handleClick={handleChangeContentType}
             />
           </div>
-          <div className="right-side">
-            <div className="nav">
-              {/* {console.log(data.name)} */}
-              <NavComponent content={data.name} handleClick={handleChangeContentType} />
+          <div className="card">
+            <div className={'counter'}>
+              <div className="entries">
+                {data.collections ? data.collections.length : '0'} Entries Found
+              </div>
+              <div className="add-data">
+                <div onClick={handleAddData}>Add a new entry</div>
+              </div>
             </div>
-            <div className="card">
-              <div className={'counter'}>
-                <div className="entries">
-                  {data.collections ? data.collections.length : '0'} Entries
-                  Found
-                </div>
-                <div className="add-data">
-                 
-                    <div onClick={handleAddData}>Add a new entry</div>
-                 
-                </div>
+            <div className="attributes">
+              <div className="data-attr">
+                {data.collections
+                  ? Object.keys(data.collections[0].data).map((item) => (
+                      <div style={{ width: '100%' }} key={item}>
+                        {item}
+                      </div>
+                    ))
+                  : null}
               </div>
-              <div className="attributes">
-                <div className="data-attr">
-                  {data.collections
-                    ? Object.keys(data.collections[0].data).map((item) => (
-                        <div style={{ width: '100%' }} key={item}>
-                          {item}
-                        </div>
-                      ))
-                    : null}
-                </div>
-                <div className="actions-tag">
-                  {data.collections ? (
-                    <p style={{ marginBottom: '0px' }}>Actions</p>
-                  ) : null}
-                </div>
+              <div className="actions-tag">
+                {data.collections ? (
+                  <p style={{ marginBottom: '0px' }}>Actions</p>
+                ) : null}
               </div>
+            </div>
 
-              {data.collections
-                ? data.collections.map((item) => (
-                    <CollectionCardComponent content={item} />
-                  ))
-                : null}
-            </div>
+            {data.collections
+              ? data.collections.map((item) => (
+                  <CollectionCardComponent content={item} />
+                ))
+              : null}
           </div>
         </div>
-      );
-    } 
-       
-      
+      </div>
+    );
+  }
 }
-
