@@ -4,6 +4,7 @@ import "./LoginPage.css";
 import makeRequest from "../../utils/makeRequest";
 import { loginUser, createUser } from "../../constants/authEndpoints";
 import { useNavigate } from "react-router-dom";
+import {BASE_URL} from "../../constants/authEndpoints";
 export default function LoginPage() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -18,7 +19,7 @@ export default function LoginPage() {
     const handleLogin = async () => {
         try{
             if(login){
-                const result=await makeRequest(loginUser, {data:{ email, password } });
+                const result=await makeRequest(loginUser,BASE_URL, {data:{ email, password } });
                 localStorage.setItem("token", result.token);
                 if(result.success){
                     navigate("/home");

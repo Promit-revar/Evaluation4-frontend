@@ -1,0 +1,71 @@
+.side-bar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+    min-width: 300px;
+    
+}
+.side-bar-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 20px;
+    align-items: center;
+    height: 80px;
+    font-size: 30px;
+    font-weight: 500px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #6004CC;
+    color: #fff;
+}
+.side-bar-body{
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #26262A;
+    height: 100vh;
+    
+}
+.side-bar-search{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+.side-bar-search img{
+    height: 40px;
+    width: 40px;
+}
+.side-bar-search input{
+    background-color: #26262A;
+    border: none;
+    font-size: medium;
+    width: 180px;
+}
+.side-bar-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+}
+.side-bar-footer p{
+    color: gray;
+    cursor: pointer;
+}
+.list{
+    color: grey;
+    align-self: flex-start;
+    font-size: large;
+    cursor: pointer;
+}
+.active{
+    color: #fff;
+    font-weight: 500;
+    background-color: black;
+    cursor: pointer;
+}
