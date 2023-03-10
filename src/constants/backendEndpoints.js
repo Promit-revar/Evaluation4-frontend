@@ -40,3 +40,7 @@ export const updateContentTypeEndpoint = {
     url: '/update-content-type/',
     method: 'PUT'
 }
+export const updateCollections = {
+    url: '/data/',
+    method: 'PUT'
+}

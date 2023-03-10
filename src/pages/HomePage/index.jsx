@@ -135,13 +135,10 @@ export default function HomePage() {
         setData({ ...res });
         }
         else{
-            //console.log("all content types",allContentTypes)
             const contentData=allContentTypes.filter((item)=>{
                 return item.contentId===id;
             });
-            //console.log(contentData);
             setData({ ...contentData[0] });
-
         }
       })
       .catch((err) => {
