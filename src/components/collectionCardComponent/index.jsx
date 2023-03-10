@@ -53,7 +53,7 @@ export default function CollectionCardComponent(props) {
   };
   if (props.content) {
     return (
-      <div className="collection-card">
+      <div className="collection-card" data-testId="main-div">
         {showModal && (
           <ModalComponent>
             <div className="header">

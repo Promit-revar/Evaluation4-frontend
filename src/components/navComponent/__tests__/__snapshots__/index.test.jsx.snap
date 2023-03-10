@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavComponent should render correctly 1`] = `
+<DocumentFragment>
+  <nav>
+    <div
+      class="nav-container"
+    >
+      <div
+        class="nav-logo"
+      >
+        <h1 />
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

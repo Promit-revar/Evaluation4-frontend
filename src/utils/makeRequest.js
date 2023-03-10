@@ -1,8 +1,8 @@
-/* eslint-disable */
 import axios from 'axios';
-const makeRequest = async ({ url, method },BASE_URL, dynamicConfig={}) => {
+
+const makeRequest = async ({ url, method }, BASE_URL, dynamicConfig = {}) => {
   try {
-    console.log(url,method)
+    console.log(url, method);
     const response = await axios({
       baseURL: BASE_URL,
       url,
