@@ -20,7 +20,6 @@ export default function CollectionCardComponent(props) {
 
         );
     }
-    console.log(props.content)
     if(props.content){
     return (
         <div className="collection-card">

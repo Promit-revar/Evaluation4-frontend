@@ -16,3 +16,7 @@ export const deleteCollection = {
     url: '/data/',
     method: 'DELETE'
 }
+export const postCollection = {
+    url: '/data/',
+    method: 'POST'
+}
